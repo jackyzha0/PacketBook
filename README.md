@@ -12,18 +12,26 @@ The testnet blockchain is viewable online.  Here is a link to one of the address
 
 ## How we built it
 
-As it stands right now, our project is a bit of a hodgepodge.  The majority of PacketBook is written in Node.js and deployed on [Stdlib](https://stdlib.com/).  We're using Twilio to send/receive SMS.  We also have some Python code on a Heroku dyno that handles some authentication.  We're also using a Mongo database running online to handle the few bits of user data that are collected (mainly phone #'s and crypto keys).  
+As it stands right now, our project is a bit of a hodgepodge.  The majority of PacketBook is written in Node.js and deployed on [Stdlib](https://stdlib.com/).  We're using Twilio to hand messaging and calls.  We also have some Python code on a Heroku dyno that handles authentication.  In addition, we use a Mongo database running online to handle the few bits of user data that are collected (mainly phone #'s and crypto keys).  
 
 ## Challenges we ran into
 
-Our biggest challenge by far was authentication.  Because our product needed to be accessible entirely by text messages, there weren't many options to make our bot secure.  We couldn't implement things such as 2FA because our target users don't really have any other "factors" for authentication.
+Our biggest challenge by far was authentication.  Because our product needed to be accessible entirely by text messages, there weren't many options to make our bot secure.  We couldn't implement things such as 2FA because our target users don't really have any other "factors" for authentication. Some other major hurdles that we passed were language support in many of the libraries we used--especially since we used a fusion of JS and Python.
 
 ## Accomplishments that we're proud of
 
-We're pretty proud of just having a working product that solves a real-world need.  This was our first hackathon so we didn't really know what to expect, but we're glad to be able to show off something at the end that we're pretty proud of 🙂 .  
+We're pretty proud of just having a working product that solves a real-world need.  This was our first hackathon so we didn't really know what to expect, but we're glad to be able to show off something that we finished and are proud of.
 
 ## What we learned
 
-
+We decided on using a phone-call verification method that involes keeping and memorizing a 6-digit 'key' or 'password'. In addition, we created dummy encryption methods for the on-site resources such as Twilio login, and stronger encryption methods such as AES-256-CTR for transactions. Both which were new technologies for us.
 
 ## What's next for PacketBook
+Add support for currency exchange
+Clean up the code
+Google DialogFlow Implementation
+Expand Twilio platform to support more users
+
+## Check it out for yourself!
+Text 'Hi' to +1 604 670 8545
+*May or may not work depending on how many registered devices
