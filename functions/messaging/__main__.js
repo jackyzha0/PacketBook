@@ -83,7 +83,12 @@ module.exports = (
 		}
 		
 		if(Body.toLowerCase().split(" ")[0].trim() == "balance"){
-			send(from.number, balance, to.number);
+			send(from.number, "Hi!  Your balance is "+balance+" "+process.env.CURRENCY, to.number);
+		}
+		
+		else if(Body.toLowerCase().split(" ")[0].trim() == "faucet"){
+			User.update({phone : from.number}, {$inc: {balance : 3}}, function(err, result){});
+			send(from.number, "Sent you "+3+" "+process.env.CURRENCY);
 		}
 
 		else if(Body.toLowerCase().trim().substring(0,8) == "register"){
@@ -107,9 +112,9 @@ module.exports = (
 			}
 			else{
 				var toSend = Body.toLowerCase().split(" ")[1];
-				User.findOne({"phone": toSend}, function(err, User){
+				User.findOne({"phone": toSend}, function(err, result){
 					if(err){throw err}
-					if(User){
+					if(result){
 						if(!Body.toLowerCase().split(" ")[2]){
 							send(from.number, "Please specify an amount to send.", to.number);
 						}
@@ -119,8 +124,14 @@ module.exports = (
 						else if(parseFloat(Body.toLowerCase().split(" ")[2]) > balance){
 							send(from.number, "Insufficient funds", to.number);
 						}
+						else if(parseFloat(Body.toLowerCase().split(" ")[2]) < 0){
+							send(from.number, "Nice try.", to.number);
+						}
 						else{
-							
+							var transaction = parseFloat(Body.toLowerCase().split(" ")[2]);
+							User.update({phone : from.number}, {$inc: {balance : -transaction}}, function(err, result){});
+							User.update({phone : Body.toLowerCase().split(" ")[1]}, {$inc: {balance : transaction}}, function(err,result){});
+							send(from.number, "Sent "+transaction+" "+process.env.CURRENCY+" to"+Body.toLowerCase().split(" ")[1]);
 						}
 					}
 					else{
@@ -131,7 +142,7 @@ module.exports = (
 		}
 		
 		else{
-			send(from.number, "Welcome to your SMSWallet.  Commands: register, send, balance", to.number);
+			send(from.number, ["Welcome to PacketBook.  Commands:","Register : Create a new account", "Balance : Check your balance", "Send <receipent phone> <amount> : Send money to another user", "Faucet : Receive free (fake) money"].join('\n'), to.number);
 		}
 		
 	});
