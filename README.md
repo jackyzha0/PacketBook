@@ -1,165 +1,37 @@
-# Your StdLib Twilio Hub
-
-Welcome to your Twilio Hub on StdLib!
-
-The goal of the Twilio Hub is to provide your project, team or company
-with a fully-functional, robust telephony hub for things like bots and
-customer support. Through StdLib, you're guaranteed that your infrastructure
-scales infinitely and you never have to manage servers. While it is necessary
-to write *some* code, StdLib is easy and malleable enough to be completely hackable
-to even the most junior developers.
-
-# Your Project
-
-The first thing you'll probably notice is your `functions/` directory. This is
-your StdLib function directory which maps directly to HTTP endpoints. There are
-six "out of the box" functions in your Twilio Hub.
-
-- `__main__.js`
-- `voice/__main__.js`
-- `messaging/__main__.js`
-- `messaging/__notfound__.js`
-- `messaging/more.js`
-- `messaging/whoami.js`
-
-We'll go through these in the order listed here.
-
-## Function: `functions/__main__.js`
-
-This is your main endpoint, corresponding to `https://<username>.lib.id/<service>/`.
-This is, of course, where `<username>` is your username and `<service>` is your service
-name.
-
-Any time a function has the filename `__main__.js`, the enclosing folder is
-used as the route name over HTTP. You can think of it like the default function
-for a specific directory.
-
-Note that when pushing to a development environment (or if you want to access
-  a specific version), this should be reached via:
-  `https://username.lib.id/service@dev/main` (if your dev environment is called
-  `dev`, also the default local environment name) or
-  `https://username.lib.id/service@0.0.0/main` (if your version is 0.0.0).
-
-### Usage
-
-This endpoint initiates a conversation with a specific telephone number via SMS.
-Just provide a number (via the `tel` parameter) to begin.
-
-With the [StdLib command line tools](https://github.com/stdlib/lib), you can
-test this using `$ lib . --tel [Telephone Number]`
-
-## Function: `functions/voice/__main__.js`
-
-This is the main HTTP Webhook handler for incoming phonecalls from Twilio.
-You'll set your Twilio Webhook handler to accept this using the URL:
-
-```
-dev environment:
-http://username.lib.id/service@dev/voice/
-
-production:
-http://username.lib.id/service/voice/
-```
-
-Where `username` is your StdLib username and `service` is the name of this
-service as its deployed.
-
-### Usage
-
-Simply point your Twilio number voice webhook to this URL. By default, it
-redirects any incoming calls to `process.env.FORWARD_NUMBER` (`"FORWARD_NUMBER"`
-in `env.json`.)
-
-## Function: `functions/messaging/__main__.js`
-
-This is the main HTTP Webhook handler for incoming SMS and MMS messages from
-Twilio. You'll set your Twilio Webhook handler to accept this using the URL:
-
-```
-dev environment:
-http://username.lib.id/service@dev/messaging/
-
-production:
-http://username.lib.id/service/messaging/
-```
-
-Where `username` is your StdLib username and `service` is the name of this
-service as its deployed.
-
-### Usage
-
-This function will dispatch other StdLib functions that you've built, namely
-the `functions/messaging/__notfound__.js`, `functions/messaging/more.js`
-and `functions/messaging/whoami.js` to begin with (unless you add more).
-
-## Function: `functions/messaging/__notfound__.js`
-
-This is the SMS / MMS "not found" handler. It also handles *any MMS messages*
-via the `media` parameter. If the message your Twilio Hub on StdLib receives
-can not be mapped to a named function (like `more` or `whoami`) this handler
-will be triggered.
-
-### Usage
-
-This handler outputs a string for simple messaging and development testing.
-You can test from your command line using:
-
-```shell
-$ lib .messaging.__notfound__ --body "My message"
-```
-
-Or for an MMS message,
-
-```shell
-$ lib .messaging.__notfound__ --media file:./path/to/myfile.jpg
-```
-
-## Function: `functions/messaging/more.js`
-
-This is the SMS handler for messages containing the word "more" (in any
-  capitalization variation) as their sole contents.
-
-All named functions will be dispatched similarly from `functions/messaging/__main__.js`,
-but this can be modified to suit your needs, specifically.
-
-### Usage
-
-This handler outputs a string for simple messaging and development testing.
-You can test from your command line using:
-
-```shell
-$ lib .messaging.more
-```
-
-## Function: `functions/messaging/whoami.js`
-
-This is the SMS handler for messages containing the word "whoami" (in any
-  capitalization variation) as their sole contents.
-
-It is meant to show the use of the `to` and `from` objects to show you can
-track originating number information.
-
-### Usage
-
-This handler outputs a string for simple messaging and development testing.
-You can test from your command line using:
-
-```shell
-$ lib .messaging.whoami
-```
-
-# Helpers
-
-You'll notice a `/helpers/` directory which contains a single function.
-You should store Twilio helpers here, like sending picture messages, videos,
-or any time you want to write logic that you don't want to repeat.
-
-## Helper: `helpers/send.js`
-
-Sends messages using [Twilio's NPM module](https://www.npmjs.com/package/twilio)
-and your account information from `env.json`.
-
-# That's it!
-
-We hope this has served as a welcoming introduction to your
-Twilio Hub project scaffold on [StdLib](https://stdlib.com) --- happy building!
+## The Problem
+ 
+Around two billion of the world's adult population is considered unbanked, meaning that they do not have access to a "transaction account" - a bank account or e-wallet that can send, receive and store money.  Many unbanked people live in rural, marginalized communities in the developing world, without access to newer technologies.  Fortunately, mobile phone penetration in the developing world is quite high, at over 80%; however, most of these phones are not smartphones, and they lack the capabilities to run modern apps or connect to the internet.
+ 
+## Our solution
+ 
+Our solution is a chatbot, fully accessible through the SMS (text messaging) protocol.  Users are able to issue simple commands to register, check their balance, deposit, withdraw, and send money.  PacketBook is unique in that it leverages the Stellar blockchain and tokens (XLM) for its transactions.  Stellar is currently the eighth largest cryptocurrency, with a market cap of over $10B, and has gained support from Patrick Collison (CEO of Stripe), Sam Altman (President of Y-Combinator), and IBM.  Stellar also has extremely low transaction fees (around 1/100 of a cent per transaction), making it the perfect choice for a microfinance project.
+ 
+The application is perfectly usable on the Stellar main network, but is currently deployed to the testnet.  All new registrations receive 10000 (fake) XLM that they can transact through the chatbots.
+ 
+The testnet blockchain is viewable online.  Here is a link to one of the addresses we used for testing: http://testnet.stellarchain.io/address/GCPTH5W3Q7MES3GRQTJGLW7OMKFBFBXMELKN7GJX24FJV4IB7DL2QBUY
+ 
+## How we built it
+ 
+As it stands right now, our project is a bit of a hodgepodge.  The majority of PacketBook is written in Node.js and deployed on [Stdlib](https://stdlib.com/).  We're using Twilio to hand messaging and calls.  We also have some Python code on a Heroku dyno that handles authentication.  In addition, we use a Mongo database running online to handle the few bits of user data that are collected (mainly phone #'s and crypto keys).  
+ 
+## Challenges we ran into
+ 
+Our biggest challenge by far was authentication.  Because our product needed to be accessible entirely by text messages, there weren't many options to make our bot secure.  We couldn't implement things such as 2FA because our target users don't really have any other "factors" for authentication. Some other major hurdles that we passed were language support in many of the libraries we used--especially since we used a fusion of JS and Python.
+ 
+## Accomplishments that we're proud of
+ 
+We're pretty proud of just having a working product that solves a real-world need.  This was our first hackathon so we didn't really know what to expect, but we're glad to be able to show off something that we finished and are proud of.
+ 
+## What we learned
+ 
+We decided on using a phone-call verification method that involes keeping and memorizing a 6-digit 'key' or 'password'. In addition, we created dummy encryption methods for the on-site resources such as Twilio login, and stronger encryption methods such as AES-256-CTR for transactions. Both which were new technologies for us.
+ 
+## What's next for PacketBook
+Add support for currency exchange
+Clean up the code
+Google DialogFlow Implementation
+Expand Twilio platform to support more users
+ 
+## Check it out for yourself!
+Text 'Hi' to +1 604 670 8545
+*May or may not work depending on how many registered devices
