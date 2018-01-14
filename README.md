@@ -33,5 +33,5 @@ Google DialogFlow Implementation
 Expand Twilio platform to support more users
  
 ## Check it out for yourself!
-Text 'Hi' to +1 604 670 8545
+Find us to get placed on the whitelist then text 'Hi' to +1 604 670 8545
 *May or may not work depending on how many registered devices
