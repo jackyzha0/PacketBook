@@ -4,6 +4,8 @@ var userSchema = mongoose.Schema({
    
    phone : String,
    balance: Number,
+   pubkey: String,
+   privkey: String, //not real private key, this is encrypted by a cypher of the PIN
    pin : String
     
 });

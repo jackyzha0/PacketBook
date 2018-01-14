@@ -5,17 +5,21 @@
   "author": "mykatz <mykatz01@gmail.com>",
   "main": "functions/__main__.js",
   "dependencies": {
+    "cryptr": "^2.0.0",
+    "curl": "^0.1.4",
     "lib": "^3.0.1",
     "mongodb": "^3.0.1",
     "mongoose": "^4.13.9",
     "request": "^2.81.0",
+    "stellar-base": "^0.7.6",
+    "stellar-sdk": "^0.8.0",
     "twilio": "^3.3.0"
   },
   "private": true,
   "stdlib": {
     "build": "faaslang",
     "name": "mykatz/smswallet",
-    "timeout": 10000,
+    "timeout": 30000,
     "publish": true,
     "personalize": {
       "keys": [],
