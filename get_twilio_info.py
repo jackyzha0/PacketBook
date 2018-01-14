@@ -17,7 +17,6 @@ def vig(txt='', key='', typ='d'):
         v = (txt_ints[i] - 32 + adder) % 95
 
         ret_txt += chr(v + 32)
-
     return ret_txt
 
 def read(key,file_path='inf.txt'):
