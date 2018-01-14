@@ -1,0 +1,26 @@
+{
+  "name": "smswallet",
+  "version": "0.0.0",
+  "description": "",
+  "author": "mykatz <mykatz01@gmail.com>",
+  "main": "functions/__main__.js",
+  "dependencies": {
+    "lib": "^3.0.1",
+    "mongodb": "^3.0.1",
+    "mongoose": "^4.13.9",
+    "request": "^2.81.0",
+    "twilio": "^3.3.0"
+  },
+  "private": true,
+  "stdlib": {
+    "build": "faaslang",
+    "name": "mykatz/smswallet",
+    "timeout": 10000,
+    "publish": true,
+    "personalize": {
+      "keys": [],
+      "user": []
+    },
+    "source": "twilio"
+  }
+}
