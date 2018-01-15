@@ -28,8 +28,11 @@ We decided on using a phone-call verification method that involes keeping and me
  
 ## What's next for PacketBook
 Add support for currency exchange
+
 Clean up the code
+
 Google DialogFlow Implementation
+
 Expand Twilio platform to support more users
  
 ## Check it out for yourself!
