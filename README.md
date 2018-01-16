@@ -1,3 +1,7 @@
+## Submission for NWHacks2018
+
+https://devpost.com/software/packetbook
+
 ## The Problem
  
 Around two billion of the world's adult population is considered unbanked, meaning that they do not have access to a "transaction account" - a bank account or e-wallet that can send, receive and store money.  Many unbanked people live in rural, marginalized communities in the developing world, without access to newer technologies.  Fortunately, mobile phone penetration in the developing world is quite high, at over 80%; however, most of these phones are not smartphones, and they lack the capabilities to run modern apps or connect to the internet.
