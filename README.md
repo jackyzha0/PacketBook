@@ -1,6 +1,7 @@
 ## Submission for NWHacks2018
-
 https://devpost.com/software/packetbook
+
+Placed in the top 30 winning us the SAP iXp - "Hey SAP, I Got Your Hack" and The Wolfram Award prizes.
 
 ## The Problem
  
